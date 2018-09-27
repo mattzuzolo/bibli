@@ -87,6 +87,7 @@ class App extends Component {
                             routerProps={routerProps}
                             currentUser={this.state.currentUser}
                             fetchedBookArray={this.state.fetchedBookArray}
+                            onCollectionCardClick={this.onCollectionCardClick}
                             />
               }}/>
             <Route path ={`/collections/:id`} render={(routerProps) => {

@@ -10,8 +10,11 @@ class SearchResultsContainer extends Component {
         {this.props.fetchedBookArray.map(book => (
           <CollectionCard
             book={book}
+            key={book.id}
+            it={book.id}
             title={book.volumeInfo.title}
             author={book.volumeInfo.authors[0]}
+            onCollectionCardClick={this.props.onCollectionCardClick}
           />
         ))}
       </div>
