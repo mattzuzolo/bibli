@@ -39,8 +39,7 @@ class App extends Component {
     let submittedQuery = this.state.searchQuery
     let submittedQueryWithPlus = submittedQuery.trim().split(' ').join('+');
 
-    // fetch(`https://www.googleapis.com/books/v1/volumes?q=conversations+with+friends`)
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${submittedQueryWithPlus}`)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${submittedQueryWithPlus}&maxResults=40`)
       .then(response => response.json())
       .then(data => data.items.map(book => console.log(book)))
 
