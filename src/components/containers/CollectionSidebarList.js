@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-
 import CollectionSidebarItem from "../CollectionSidebarItem";
 
 class CollectionSidebarList extends Component {
   render(){
-    console.log("COLLECTION LIST PROPS", this.props.collectionsArray)
     return(
       <div className="div--collection-list">
         <h3>Your collections:</h3>
