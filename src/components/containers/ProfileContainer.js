@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-
 import CollectionSidebarList from "./CollectionSidebarList"
 
 class ProfileContainer extends Component {
   render(){
-    // console.log("ProfileContainer PROPS", this.props)
-
     return(
       <div className="div--profile-container">
         <CollectionSidebarList
