@@ -10,8 +10,6 @@ import ProfileContainer from "./components/containers/ProfileContainer"
 //Components
 import NavBar from "./components/NavBar"
 
-const googleBooks = "#"
-
 class App extends Component {
   state = {
     searchQuery: "",
@@ -40,12 +38,10 @@ class App extends Component {
     console.log("YOUR QUERY:", this.state.searchQuery)
     let submittedQuery = this.state.searchQuery
     let submittedQueryWithPlus = submittedQuery.trim().split(' ').join('+');
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${submittedQueryWithPlus}`)
-      .then(console.log)
 
-    // fetch('https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn + "&key=" + apiKey, {
-    // method: 'get'
-    // })
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=conversations+with+friends`)
+      .then(response => response.json())
+      .then(data => data.items.map(book => console.log(book)))
 
     this.setState({searchQuery: ""})
   }
