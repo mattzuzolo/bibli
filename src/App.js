@@ -16,7 +16,7 @@ class App extends Component {
     currentUser: {id: 1, email: "matt@gmail.com", created_at: "2018-09-26T14:40:45.916Z", updated_at: "2018-09-26T14:40:45.916Z"},
     collectionsArray: [],
     selectedCollection: {},
-    booksArray: [],
+    fetchedBookArray: [],
     selectedBook: {},
   }
 
@@ -35,15 +35,19 @@ class App extends Component {
   //Form submit event listener. Submission will trigger fetch to external Google books api
   onSearchSubmit = (event) => {
     event.preventDefault();
-    console.log("YOUR QUERY:", this.state.searchQuery)
     let submittedQuery = this.state.searchQuery
     let submittedQueryWithPlus = submittedQuery.trim().split(' ').join('+');
 
     fetch(`https://www.googleapis.com/books/v1/volumes?q=${submittedQueryWithPlus}&maxResults=40`)
       .then(response => response.json())
-      .then(data => data.items.map(book => console.log(book)))
-
-    this.setState({searchQuery: ""})
+      .then(fetchedBookArray => this.setState({
+        fetchedBookArray: fetchedBookArray.items,
+        searchQuery: ""
+      }))
+      .catch(error => {
+        console.log("An error occurred during the fetch", error)
+        this.setState({searchQuery: ""})
+      })
   }
 
   //Event listener on event list so user can visit see the specific collection
@@ -59,6 +63,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("CURRENT BOOK ARRAY FROM GOOGLE", this.state.fetchedBookArray)
     return (
       <div className="App">
         <Route path="/" render={(routerProps) => <NavBar
