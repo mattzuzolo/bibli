@@ -6,9 +6,6 @@ class CollectionContainer extends Component {
   state = {
     localBooksArray: [],
   }
-
-
-
   componentDidMount(){
     fetch(`http://localhost:3000/api/v1/collections/${this.props.collectionId}`)
       .then(response => response.json())
@@ -16,7 +13,6 @@ class CollectionContainer extends Component {
   }
 
   render(){
-    console.log("LOCAL BOOK ARRAY", this.state.localBooksArray)
     return(
       <div>
         {this.state.localBooksArray.map(book => (
@@ -32,7 +28,6 @@ class CollectionContainer extends Component {
       </div>
     )
   }
-
 }
 
 export default CollectionContainer;
