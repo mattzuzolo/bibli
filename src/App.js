@@ -4,6 +4,7 @@ import './App.css';
 
 //Containers
 import CollectionContainer from "./components/containers/CollectionContainer"
+import SearchResultsContainer from "./components/containers/SearchResultsContainer"
 import DetailContainer from "./components/containers/DetailContainer"
 import ProfileContainer from "./components/containers/ProfileContainer"
 
@@ -37,13 +38,14 @@ class App extends Component {
     event.preventDefault();
     let submittedQuery = this.state.searchQuery
     let submittedQueryWithPlus = submittedQuery.trim().split(' ').join('+');
-
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${submittedQueryWithPlus}&maxResults=40`)
+    //&maxResults=40
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${submittedQueryWithPlus}`)
       .then(response => response.json())
       .then(fetchedBookArray => this.setState({
         fetchedBookArray: fetchedBookArray.items,
         searchQuery: ""
       }))
+      .then(() => this.props.history.push(`/search/${submittedQueryWithPlus}`))
       .catch(error => {
         console.log("An error occurred during the fetch", error)
         this.setState({searchQuery: ""})
@@ -63,7 +65,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("CURRENT BOOK ARRAY FROM GOOGLE", this.state.fetchedBookArray)
+    // console.log("STATE in APP", this.state.fetchedBookArray)
     return (
       <div className="App">
         <Route path="/" render={(routerProps) => <NavBar
@@ -79,6 +81,14 @@ class App extends Component {
               collectionsArray={this.state.collectionsArray}
               onCollectionItemClick={this.onCollectionItemClick}
             />}/>
+            <Route path ={`/search/:query`} render={(routerProps) => {
+                  let searchQuery = routerProps.match.params.id;
+                  return <SearchResultsContainer
+                            routerProps={routerProps}
+                            currentUser={this.state.currentUser}
+                            fetchedBookArray={this.state.fetchedBookArray}
+                            />
+              }}/>
             <Route path ={`/collections/:id`} render={(routerProps) => {
               let collectionId = routerProps.match.params.id;
               return <CollectionContainer
