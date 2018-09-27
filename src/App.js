@@ -6,6 +6,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 //Containers
 import CollectionContainer from "./components/containers/CollectionContainer"
 import ProfileContainer from "./components/containers/ProfileContainer"
+import DetailContainer from "./components/containers/DetailContainer"
 
 
 //Components
@@ -19,6 +20,7 @@ class App extends Component {
     collectionsArray: [],
     selectedCollection: {},
     booksArray: [],
+    selectedBook: {},
   }
 
   componentDidMount(){
@@ -33,21 +35,20 @@ class App extends Component {
 
   onSearchSubmit = (event) => {
     event.preventDefault();
-    console.log("Submitted query:", this.state.searchQuery)
   }
 
   onCollectionItemClick = (event, selectedCollection) => {
-    console.log("You clicked a collection", selectedCollection)
     this.setState({selectedCollection: selectedCollection})
     this.props.history.push(`/collections/${selectedCollection.id}`)
   }
 
-  onCollectionCardClick = (event, selectedCard) => {
-    console.log("You clicked a collection card", selectedCard);
-
+  onCollectionCardClick = (event, selectedBook) => {
+    this.setState({selectedBook})
+    this.props.history.push(`/books/${selectedBook.id}`)
   }
 
   render() {
+    console.log("APP STATE BOOK", this.state.selectedBook)
     return (
       <div className="App">
         <Route path="/" render={(routerProps) => <NavBar
@@ -74,6 +75,15 @@ class App extends Component {
                           selectedCollection={this.state.selectedCollection}
                           />
               }} />
+
+        <Route path ={`/books/:id`} render={(routerProps) => {
+            let bookId = routerProps.match.params.id;
+            return <DetailContainer
+                      routerProps={routerProps}
+                      bookId={bookId}
+                      currentUser={this.state.currentUser}
+                      />
+          }} />
 
       </div>
     );
