@@ -8,8 +8,6 @@ class DetailContainer extends Component {
   }
 
   componentDidMount(){
-
-    console.log("this.props.bookId", this.props.bookId)
     fetch(`http://localhost:3000/api/v1/books/${this.props.bookId}`)
       .then(response => response.json())
       .then(book => this.setState({
