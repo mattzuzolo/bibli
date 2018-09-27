@@ -11,6 +11,8 @@ import ProfileContainer from "./components/containers/ProfileContainer"
 //Components
 import NavBar from "./components/NavBar"
 
+const bookUrl = "http://localhost:3000/api/v1/books"
+
 class App extends Component {
   state = {
     searchQuery: "",
@@ -61,7 +63,38 @@ class App extends Component {
   //Event listener for each card in a specific collection so User can get to individual book detail page
   onCollectionCardClick = (event, selectedBook) => {
     this.setState({selectedBook})
+    // console.log("SELECTED BOOK:", selectedBook)
+    let postBookBody = {
+      title: selectedBook.volumeInfo.title,
+      author: selectedBook.volumeInfo.authors[0],
+      genre: selectedBook.volumeInfo.categories[0],
+      year: selectedBook.volumeInfo.publishedDate,
+      description: selectedBook.volumeInfo.description,
+      page_count: selectedBook.volumeInfo.pageCount,
+      google_id: selectedBook.id,
+      google_url: selectedBook.volumeInfo.canonicalVolumeLink,
+      thumbnail_url: selectedBook.volumeInfo.imageLinks.thumbnail,
+      isbn_ten: selectedBook.volumeInfo.industryIdentifiers[1].identifier,
+      isbn_thirteen: selectedBook.volumeInfo.industryIdentifiers[0].identifier,
+    }
+
+    // console.log("postBookBody", postBookBody)
+
+    this.postNewBook(postBookBody);
     this.props.history.push(`/books/${selectedBook.id}`)
+  }
+
+  postNewBook = (postBookBody) => {
+    const postBookConfig = {
+      Accept: "application/json",
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(postBookBody)
+    }
+    // console.log("postBookConfig:", postBookConfig)
+    return fetch(bookUrl, postBookConfig)
   }
 
   render() {
