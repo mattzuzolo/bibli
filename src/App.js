@@ -20,6 +20,7 @@ class App extends Component {
     collectionsArray: [],
     selectedCollection: {},
     fetchedBookArray: [],
+    allBooks: [],
     selectedBook: {},
   }
 
@@ -28,6 +29,10 @@ class App extends Component {
     fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}/collections`)
       .then(response => response.json())
       .then(collectionsArray => this.setState({collectionsArray}))
+
+    fetch(`http://localhost:3000/api/v1/books/`)
+      .then(response => response.json())
+      .then(allBooks => this.setState({allBooks}))
   }
 
   //Update state to maintain controlled search form
@@ -61,25 +66,38 @@ class App extends Component {
   }
 
   //Event listener for each card in a specific collection so User can get to individual book detail page
+
+  checkIfBookExists = (allBooks, selectedBook) => {
+    return allBooks.find(book => book.google_id === selectedBook.id)
+  }
+
   onCollectionCardClick = (event, selectedBook) => {
     this.setState({selectedBook})
-    // console.log("SELECTED BOOK:", selectedBook)
-    let postBookBody = {
-      title: selectedBook.volumeInfo.title,
-      author: selectedBook.volumeInfo.authors[0],
-      genre: selectedBook.volumeInfo.categories[0],
-      year: selectedBook.volumeInfo.publishedDate,
-      description: selectedBook.volumeInfo.description,
-      page_count: selectedBook.volumeInfo.pageCount,
-      google_id: selectedBook.id,
-      google_url: selectedBook.volumeInfo.canonicalVolumeLink,
-      thumbnail_url: selectedBook.volumeInfo.imageLinks.thumbnail,
-      isbn_ten: selectedBook.volumeInfo.industryIdentifiers[1].identifier,
-      isbn_thirteen: selectedBook.volumeInfo.industryIdentifiers[0].identifier,
+
+    let foundBook = this.checkIfBookExists(this.state.allBooks, selectedBook);
+
+    //POST new book to DB if doesn't exist. Push user onward to detail page
+    if(foundBook){
+      return this.props.history.push(`/books/${foundBook.google_id}`)
+    }
+    else {
+      let postBookBody = {
+        title: selectedBook.volumeInfo.title,
+        author: selectedBook.volumeInfo.authors[0],
+        genre: selectedBook.volumeInfo.categories[0],
+        year: selectedBook.volumeInfo.publishedDate,
+        description: selectedBook.volumeInfo.description,
+        page_count: selectedBook.volumeInfo.pageCount,
+        google_id: selectedBook.id,
+        google_url: selectedBook.volumeInfo.canonicalVolumeLink,
+        thumbnail_url: selectedBook.volumeInfo.imageLinks.thumbnail,
+        isbn_ten: selectedBook.volumeInfo.industryIdentifiers[1].identifier,
+        isbn_thirteen: selectedBook.volumeInfo.industryIdentifiers[0].identifier,
+      }
+      this.postNewBook(postBookBody)
+        .then(() => this.props.history.push(`/books/${postBookBody.google_id}`))
     }
 
-    this.postNewBook(postBookBody);
-    this.props.history.push(`/books/${selectedBook.id}`)
   }
 
   postNewBook = (postBookBody) => {
