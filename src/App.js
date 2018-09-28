@@ -96,7 +96,6 @@ class App extends Component {
   }
 
   //Event listener for each card in a specific collection so User can get to individual book detail page
-
   checkIfBookExists = (allBooks, selectedBook) => {
     return allBooks.find(book => book.google_id === selectedBook.id)
   }
