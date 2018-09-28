@@ -78,8 +78,6 @@ class App extends Component {
       isbn_thirteen: selectedBook.volumeInfo.industryIdentifiers[0].identifier,
     }
 
-    // console.log("postBookBody", postBookBody)
-
     this.postNewBook(postBookBody);
     this.props.history.push(`/books/${selectedBook.id}`)
   }
