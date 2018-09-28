@@ -14,9 +14,16 @@ class CollectionSidebarList extends Component {
               key={collection.id}
               name={collection.name}
               onCollectionItemClick={this.props.onCollectionItemClick}
+
             />
           ))}
         </ul>
+
+        <h3>Create a new collection:</h3>
+        <form onSubmit={this.props.onNewCollectionInputSubmit}>
+          <input onChange={this.props.onNewCollectionInputChange}  placeholder="Give your new collection a name"></input>
+          <button>Submit</button>
+        </form>
       </div>
     )
   }

@@ -12,10 +12,12 @@ import ProfileContainer from "./components/containers/ProfileContainer"
 import NavBar from "./components/NavBar"
 
 const bookUrl = "http://localhost:3000/api/v1/books"
+const collectionsUrl = "http://localhost:3000/api/v1/collections"
 
 class App extends Component {
   state = {
     searchQuery: "",
+    newCollectionInput: "",
     currentUser: {id: 1, email: "matt@gmail.com", created_at: "2018-09-26T14:40:45.916Z", updated_at: "2018-09-26T14:40:45.916Z"},
     collectionsArray: [],
     selectedCollection: {},
@@ -57,6 +59,34 @@ class App extends Component {
         console.log("An error occurred during the fetch", error)
         this.setState({searchQuery: ""})
       })
+  }
+
+  onNewCollectionInputChange = (event) => {
+    this.setState({newCollectionInput: event.target.value})
+  }
+
+  onNewCollectionInputSubmit = (event) => {
+    console.log("FORM SUBMITTED")
+    event.preventDefault();
+    let name = this.state.newCollectionInput;
+    let collectionPostBody = {
+      user_id: this.state.currentUser.id,
+      name,
+    }
+    const collectionPostConfig = {
+      Accept: "application/json",
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(collectionPostBody)
+    }
+
+    fetch(collectionsUrl, collectionPostConfig)
+    this.setState({
+      newCollectionInput: "",
+      collectionsArray: [...this.state.collectionsArray, collectionPostBody]
+    })
   }
 
   //Event listener on event list so user can visit see the specific collection
@@ -114,7 +144,7 @@ class App extends Component {
   }
 
   render() {
-    // console.log("STATE in APP", this.state.fetchedBookArray)
+    console.log("STATE in APP", this.state.newCollectionInput)
     return (
       <div className="App">
         <Route path="/" render={(routerProps) => <NavBar
@@ -129,6 +159,8 @@ class App extends Component {
               currentUser={this.state.currentUser}
               collectionsArray={this.state.collectionsArray}
               onCollectionItemClick={this.onCollectionItemClick}
+              onNewCollectionInputChange={this.onNewCollectionInputChange}
+              onNewCollectionInputSubmit={this.onNewCollectionInputSubmit}
             />}/>
             <Route path ={`/search/:query`} render={(routerProps) => {
                   let searchQuery = routerProps.match.params.id;

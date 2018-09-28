@@ -8,6 +8,8 @@ class ProfileContainer extends Component {
         <CollectionSidebarList
           collectionsArray={this.props.collectionsArray}
           onCollectionItemClick={this.props.onCollectionItemClick}
+          onNewCollectionInputChange={this.props.onNewCollectionInputChange}
+          onNewCollectionInputSubmit={this.props.onNewCollectionInputSubmit}
         />
         <div>
           <h1>Welcome to Bibli, {this.props.currentUser.email}</h1>
