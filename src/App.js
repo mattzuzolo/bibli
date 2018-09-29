@@ -144,15 +144,10 @@ class App extends Component {
   }
 
   onAddBookToCollectionSubmit = (event, book_id) => {
-    console.log("Trying to add a book to a collection", parseInt(event.target.value))
-    console.log("selected book", this.state.selectedBook)
-
     let bookCollectionBody = {
       collection_id: parseInt(event.target.value),
       book_id,
     }
-
-    console.log("bookCollectionBody", bookCollectionBody)
 
     let postBookCollectionConfig = {
       Accept: "application/json",
@@ -162,14 +157,10 @@ class App extends Component {
       },
       body: JSON.stringify(bookCollectionBody)
     }
-
-    console.log("postBookCollectionConfig", postBookCollectionConfig)
-    console.log("BOOK COLLECTION URL", bookCollectionUrl)
     return fetch(bookCollectionUrl, postBookCollectionConfig)
   }
 
   render() {
-    console.log("STATE in APP", this.state.newCollectionInput)
     return (
       <div className="App">
         <Route path="/" render={(routerProps) => <NavBar
