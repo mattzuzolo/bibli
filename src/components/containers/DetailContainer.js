@@ -43,7 +43,8 @@ class DetailContainer extends Component {
         <h1>{this.state.title} by {this.state.author}</h1>
         <div>
           <p>Add this book to a collection:</p>
-            <select onChange={this.props.onAddBookToCollectionSubmit}>
+            <select onChange={(event) => this.props.onAddBookToCollectionSubmit(event, this.state.id)}>
+              <option></option>
               {this.props.collectionsArray.map(collection => <option value={collection.id} key={collection.id}>{collection.name}</option>)}
             </select>
             <button onClick={this.props.onAddBookToCollectionSubmit}>Add book</button>

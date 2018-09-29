@@ -13,7 +13,7 @@ import NavBar from "./components/NavBar"
 
 const bookUrl = "http://localhost:3000/api/v1/books"
 const collectionsUrl = "http://localhost:3000/api/v1/collections"
-const bookCollectionUrl = ""
+const bookCollectionUrl = "http://localhost:3000/api/v1/book_collections"
 
 class App extends Component {
   state = {
@@ -143,13 +143,13 @@ class App extends Component {
     return fetch(bookUrl, postBookConfig)
   }
 
-  onAddBookToCollectionSubmit = (event) => {
-    console.log("Trying to add a book to a collection", event.target.value)
+  onAddBookToCollectionSubmit = (event, book_id) => {
+    console.log("Trying to add a book to a collection", parseInt(event.target.value))
     console.log("selected book", this.state.selectedBook)
 
     let bookCollectionBody = {
       collection_id: parseInt(event.target.value),
-      book_id: this.state.selectedBook.id,
+      book_id,
     }
 
     console.log("bookCollectionBody", bookCollectionBody)
@@ -165,6 +165,7 @@ class App extends Component {
 
     console.log("postBookCollectionConfig", postBookCollectionConfig)
     console.log("BOOK COLLECTION URL", bookCollectionUrl)
+    return fetch(bookCollectionUrl, postBookCollectionConfig)
   }
 
   render() {
@@ -210,6 +211,7 @@ class App extends Component {
                 return <DetailContainer
                           routerProps={routerProps}
                           bookId={bookId}
+                          selectedBook={this.state.selectedBook}
                           currentUser={this.state.currentUser}
                           collectionsArray={this.state.collectionsArray}
                           onAddBookToCollectionSubmit={this.onAddBookToCollectionSubmit}
