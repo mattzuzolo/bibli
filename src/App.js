@@ -189,6 +189,7 @@ class App extends Component {
                   let searchQuery = routerProps.match.params.id;
                   return <SearchResultsContainer
                             routerProps={routerProps}
+                            searchQuery={searchQuery}
                             currentUser={this.state.currentUser}
                             fetchedBookArray={this.state.fetchedBookArray}
                             onCollectionCardClick={this.onCollectionCardClick}
