@@ -6,12 +6,16 @@ class CollectionContainer extends Component {
   state = {
     localBooksArray: [],
   }
+
+  //GET all the books that belong to the current collection and save to local state
+  //fetch the selected collection on page load so all needed data is always available
   componentDidMount(){
     fetch(`http://localhost:3000/api/v1/collections/${this.props.collectionId}`)
       .then(response => response.json())
       .then(fetchedBooksArray => this.setState({ localBooksArray: fetchedBooksArray }))
   }
 
+  //display all the books in the current collection
   render(){
     return(
       <div>

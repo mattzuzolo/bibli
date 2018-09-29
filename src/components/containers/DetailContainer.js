@@ -17,6 +17,7 @@ class DetailContainer extends Component {
     year: "",
   }
 
+  //fetch the selected book on page load so all needed data is always available
   componentDidMount(){
     fetch(`http://localhost:3000/api/v1/books/${this.props.bookId}`)
       .then(response => response.json())
@@ -38,6 +39,7 @@ class DetailContainer extends Component {
   }
 
   render(){
+    //This JSX displays the book + details. Also allows user to add the current book to an existing collection via select option below
     return(
       <div>
         <h1>{this.state.title} by {this.state.author}</h1>
