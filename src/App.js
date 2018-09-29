@@ -13,6 +13,7 @@ import NavBar from "./components/NavBar"
 
 const bookUrl = "http://localhost:3000/api/v1/books"
 const collectionsUrl = "http://localhost:3000/api/v1/collections"
+const bookCollectionUrl = ""
 
 class App extends Component {
   state = {
@@ -142,6 +143,30 @@ class App extends Component {
     return fetch(bookUrl, postBookConfig)
   }
 
+  onAddBookToCollectionSubmit = (event) => {
+    console.log("Trying to add a book to a collection", event.target.value)
+    console.log("selected book", this.state.selectedBook)
+
+    let bookCollectionBody = {
+      collection_id: parseInt(event.target.value),
+      book_id: this.state.selectedBook.id,
+    }
+
+    console.log("bookCollectionBody", bookCollectionBody)
+
+    let postBookCollectionConfig = {
+      Accept: "application/json",
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(bookCollectionBody)
+    }
+
+    console.log("postBookCollectionConfig", postBookCollectionConfig)
+    console.log("BOOK COLLECTION URL", bookCollectionUrl)
+  }
+
   render() {
     console.log("STATE in APP", this.state.newCollectionInput)
     return (
@@ -186,6 +211,8 @@ class App extends Component {
                           routerProps={routerProps}
                           bookId={bookId}
                           currentUser={this.state.currentUser}
+                          collectionsArray={this.state.collectionsArray}
+                          onAddBookToCollectionSubmit={this.onAddBookToCollectionSubmit}
                           />
             }}/>
         </Switch>

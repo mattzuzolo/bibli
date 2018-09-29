@@ -38,10 +38,16 @@ class DetailContainer extends Component {
   }
 
   render(){
-    console.log("CURRENT STATE OF DETAIL", this.state)
     return(
       <div>
         <h1>{this.state.title} by {this.state.author}</h1>
+        <div>
+          <p>Add this book to a collection:</p>
+            <select onChange={this.props.onAddBookToCollectionSubmit}>
+              {this.props.collectionsArray.map(collection => <option value={collection.id} key={collection.id}>{collection.name}</option>)}
+            </select>
+            <button onClick={this.props.onAddBookToCollectionSubmit}>Add book</button>
+        </div>
       </div>
     )
   }
