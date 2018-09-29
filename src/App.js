@@ -153,7 +153,7 @@ class App extends Component {
   //POST fetch that adds a new book to an existing collection
   onAddBookToCollectionSubmit = (event, book_id) => {
     let bookCollectionBody = {
-      collection_id: parseInt(event.target.value),
+      collection_id: parseInt(event.target.value, 10),
       book_id,
     }
     let postBookCollectionConfig = {
