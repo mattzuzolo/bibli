@@ -18,7 +18,7 @@ class CollectionContainer extends Component {
   //display all the books in the current collection
   render(){
     return(
-      <div>
+      <div className="div--collection-container">
         <h1>Collection: {this.props.selectedCollection.name}</h1>
         {this.state.localBooksArray.map(book => (
           <CollectionCard

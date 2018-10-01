@@ -41,7 +41,7 @@ class DetailContainer extends Component {
   render(){
     //This JSX displays the book + details. Also allows user to add the current book to an existing collection via select option below
     return(
-      <div>
+      <div className="div--detail-container">
         <h1>{this.state.title} by {this.state.author}</h1>
         <div>
           <p>Add this book to a collection:</p>

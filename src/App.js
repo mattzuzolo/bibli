@@ -169,7 +169,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App div--app">
         <Route path="/" render={(routerProps) => <NavBar
           {...routerProps}
           searchQuery={this.state.searchQuery}
