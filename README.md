@@ -16,7 +16,9 @@ To launch front-end
 npm run start
 ```
 
-Bibli's RESTful API is built with Ruby on Rails and PostgreSQL. The code is available to view here: (https://github.com/mattzuzolo/bibli-back)
+Bibli's RESTful API is built with Ruby on Rails and PostgreSQL. 
+
+The code is available to view here: (https://github.com/mattzuzolo/bibli-back)
 
 ## Author
 
