@@ -27,6 +27,7 @@ class CollectionContainer extends Component {
             id={book.id}
             title={book.title}
             author={book.author}
+            image={book.thumbnail_url}
             onCollectionCardClick={this.props.onCollectionCardClick}
            />
         ))}
