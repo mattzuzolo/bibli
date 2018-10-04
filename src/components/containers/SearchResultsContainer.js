@@ -14,6 +14,8 @@ class SearchResultsContainer extends Component {
             id={book.id}
             title={book.volumeInfo.title}
             author={book.volumeInfo.authors[0]}
+            image={book.volumeInfo.imageLinks.thumbnail}
+            year={book.volumeInfo.publishedDate}
             onCollectionCardClick={this.props.onCollectionCardClick}
           />
         ))}

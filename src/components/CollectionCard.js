@@ -4,7 +4,14 @@ class CollectionCard extends Component {
   render(){
     return(
       <div className="div--collection-card" onClick={(event) => this.props.onCollectionCardClick(event, this.props.book)}>
-        <p>{this.props.title} by {this.props.author}</p>
+        <div className="div--collection-card-thumb">
+          <img src={this.props.image} alt="book-cover"/>
+        </div>
+        <div className="div--collection-card-details">
+          <h1>{this.props.title}</h1>
+          <p>by <strong>{this.props.author}</strong></p>
+          <p>{this.props.year}</p>
+        </div>
       </div>
     )
   }

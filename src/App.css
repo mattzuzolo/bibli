@@ -8,6 +8,22 @@ body {
 
 /* ——————————————————————— */
 /* ——————————————————————— */
+/* CollectionCard STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
+
+.div--collection-card{
+  display: flex;
+  padding: 2rem;
+  padding-left: 3rem;
+}
+  .div--collection-card-details{
+    padding-left: 3rem;
+    margin-top: 0px;
+  }
+
+/* ——————————————————————— */
+/* ——————————————————————— */
 /* DETAIL CONTAINER STYLING */
 /* ——————————————————————— */
 /* ——————————————————————— */
