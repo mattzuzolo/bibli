@@ -40,17 +40,49 @@ class DetailContainer extends Component {
 
   render(){
     //This JSX displays the book + details. Also allows user to add the current book to an existing collection via select option below
+    console.log("DETAIL CONTAINER STATE", this.state)
     return(
       <div className="div--detail-container">
-        <h1>{this.state.title} by {this.state.author}</h1>
-        <div>
-          <p>Add this book to a collection:</p>
-            <select onChange={(event) => this.props.onAddBookToCollectionSubmit(event, this.state.id)}>
-              <option></option>
-              {this.props.collectionsArray.map(collection => <option value={collection.id} key={collection.id}>{collection.name}</option>)}
-            </select>
-            <button onClick={this.props.onAddBookToCollectionSubmit}>Add book</button>
+
+        <div className="div--book-column div--book-left">
+          <div className="div--book-image">
+            <img src={this.state.thumbnail_url} alt="book-cover"/>
+          </div>
+          <div>
+            <a href={this.state.google_url} target="_blank">Google Books Link</a>
+          </div>
+          <div className="div--collection-dropdown">
+            <p>Add this book to a collection:</p>
+              <select onChange={(event) => this.props.onAddBookToCollectionSubmit(event, this.state.id)}>
+                <option></option>
+                {this.props.collectionsArray.map(collection => <option value={collection.id} key={collection.id}>{collection.name}</option>)}
+              </select>
+              <button onClick={this.props.onAddBookToCollectionSubmit}>Add book</button>
+          </div>
         </div>
+
+        <div className="div--book-column div--book-right">
+          <div className="div--book-right-primary">
+            <h1 className="h1--book-title">{this.state.title}</h1>
+            <p className="p--book-author">by <strong>{this.state.author}</strong></p>
+            <p>{this.state.description}</p>
+          </div>
+          <hr/>
+          <div className="div--book-right-secondary">
+            <h3 className="h3--book-details">Details:</h3>
+            <p><strong>Genre:</strong> {this.state.genre}</p>
+            <p><strong>Released:</strong> {this.state.year}</p>
+            <p><strong>Count:</strong> {this.state.page_count} pages</p>
+            <p><strong>ISBN-10:</strong> {this.state.isbn_ten} | <strong>ISBN-13:</strong> {this.state.isbn_thirteen}</p>
+          </div>
+
+
+
+        </div>
+
+
+
+
       </div>
     )
   }

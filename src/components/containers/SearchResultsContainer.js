@@ -4,7 +4,7 @@ import CollectionCard from "../CollectionCard"
 
 class SearchResultsContainer extends Component {
   render(){
-    // console.log("Book array in search results container", this.props.fetchedBookArray[0])
+    console.log("Book array in search results container", this.props.fetchedBookArray[0])
     return(
       <div className="div--search-results-container">
         {this.props.fetchedBookArray.map(book => (

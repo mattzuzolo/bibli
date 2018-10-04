@@ -3,10 +3,48 @@
 }
 
 body {
-  margin: 2.5%;
-  margin-top: 5rem;
+  margin-top: 10rem;
 }
 
+/* ——————————————————————— */
+/* ——————————————————————— */
+/* DETAIL CONTAINER STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
+
+.div--detail-container {
+  display: flex;
+}
+
+  .div--book-column {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    max-width: 55vh;
+  }
+
+    .div--book-left{
+      text-align: center;
+    }
+
+      .div--collection-dropdown{
+        font-weight: bold;
+      }
+
+    .div--book-right{
+
+    }
+      .h1--book-title{
+        margin: 0rem;
+
+      }
+
+      .p--book-author{
+        margin-top: 0.25rem;
+      }
+
+      .h3--book-details{
+        margin: 0rem;
+      }
 
 /* ——————————————————————— */
 /* ——————————————————————— */
