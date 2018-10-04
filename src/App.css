@@ -6,6 +6,16 @@ body {
   margin-top: 10rem;
 }
 
+h1 {
+  margin: 0rem;
+  padding: 0rem;
+}
+
+h3 {
+  margin: 0rem;
+  padding: 0rem;
+}
+
 /* ——————————————————————— */
 /* ——————————————————————— */
 /* CollectionCard STYLING */
@@ -61,6 +71,22 @@ body {
       .h3--book-details{
         margin: 0rem;
       }
+
+/* ——————————————————————— */
+/* ——————————————————————— */
+/* CollectionCard STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
+
+.div--profile-container{
+  display: flex;
+  margin-left: 3rem;
+  margin-right: 2rem;
+}
+
+  .div--right-column{
+    margin-left: 2rem;
+  }
 
 /* ——————————————————————— */
 /* ——————————————————————— */
