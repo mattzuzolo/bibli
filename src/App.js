@@ -51,8 +51,8 @@ class App extends Component {
     //save query at time of submission and convert string to be used in query string for external API call
     let submittedQuery = this.state.searchQuery
     let submittedQueryWithPlus = submittedQuery.trim().split(' ').join('+');
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${submittedQueryWithPlus}`)
-    // &maxResults=40
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${submittedQueryWithPlus}&maxResults=40`)
+
       .then(response => response.json())
       //update state with the fetchedBooks and reset the searchQuery input field
       .then(fetchedBookArray => this.setState({
