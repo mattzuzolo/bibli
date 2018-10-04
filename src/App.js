@@ -106,13 +106,15 @@ class App extends Component {
 
   //Checks if the selectedBook is available locally. If not, creates a new DB entry from external Google Books api
   checkIfBookExists = (allBooks, selectedBook) => {
-    return allBooks.find(book => book.google_id === selectedBook.id)
+    return allBooks.find(book => book.google_id === selectedBook.google_id)
   }
 
   onCollectionCardClick = (event, selectedBook) => {
     this.setState({selectedBook})
 
+    
     let foundBook = this.checkIfBookExists(this.state.allBooks, selectedBook);
+
 
     //POST new book to DB if doesn't exist locally. Push user onward to detail page regardless.
     if(foundBook){
