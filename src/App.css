@@ -32,6 +32,10 @@ h3 {
     flex-wrap: wrap;
   }
 
+  .h1--collection-container-name{
+    padding-left: 2rem;
+  }
+
 /* ——————————————————————— */
 /* ——————————————————————— */
 /* CollectionCard STYLING */
@@ -41,14 +45,15 @@ h3 {
 .div--collection-card{
   display: flex;
   padding: 2rem;
-  padding-left: 3rem;
-  width: 40vh;
+  width: 30vh;
 }
 
-  .div-collection-card-list{}
+  .div-collection-card-list{
+
+  }
 
   .div--collection-card-details{
-    padding-left: 3rem;
+    padding-left: 1rem;
     margin-top: 0px;
   }
 

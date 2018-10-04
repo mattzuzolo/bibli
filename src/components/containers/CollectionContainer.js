@@ -19,7 +19,7 @@ class CollectionContainer extends Component {
   render(){
     return(
       <div className="div--collection-container">
-        <h1>Collection: {this.props.selectedCollection.name}</h1>
+        <h1 className="h1--collection-container-name">Collection: {this.props.selectedCollection.name}</h1>
         <div className="div--collection-card-list">
           {this.state.localBooksArray.map(book => (
             <CollectionCard
