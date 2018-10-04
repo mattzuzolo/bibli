@@ -18,6 +18,22 @@ h3 {
 
 /* ——————————————————————— */
 /* ——————————————————————— */
+/* Collection Container STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
+
+.div--collection-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+  .div--collection-card-list{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+/* ——————————————————————— */
+/* ——————————————————————— */
 /* CollectionCard STYLING */
 /* ——————————————————————— */
 /* ——————————————————————— */
@@ -26,7 +42,11 @@ h3 {
   display: flex;
   padding: 2rem;
   padding-left: 3rem;
+  width: 40vh;
 }
+
+  .div-collection-card-list{}
+
   .div--collection-card-details{
     padding-left: 3rem;
     margin-top: 0px;
@@ -74,7 +94,7 @@ h3 {
 
 /* ——————————————————————— */
 /* ——————————————————————— */
-/* CollectionCard STYLING */
+/* Profile STYLING */
 /* ——————————————————————— */
 /* ——————————————————————— */
 
