@@ -17,6 +17,7 @@ class CollectionContainer extends Component {
 
   //display all the books in the current collection
   render(){
+    console.log("Collection id", this.props.collectionId)
     return(
       <div className="div--collection-container">
         <h1 className="h1--collection-container-name">Collection: {this.props.selectedCollection.name}</h1>

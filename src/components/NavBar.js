@@ -2,6 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
+
+  //clear loggedin redux state, remove token and push to login upon clicking logout
+
   render(){
     return(
       <div className="div--nav-bar">
@@ -16,10 +19,10 @@ class NavBar extends Component {
             </input>
         </form>
 
-        { false
+        { typeof this.props.currentUser.id === "number"
                     ?
                     <Fragment>
-                      <button className="nav-item div--nav-bar-item nav-right button-logout" onClick={this.logout}>Logout</button>
+                      <button className="nav-item div--nav-bar-item nav-right button-logout" onClick={this.props.logoutUser}>Logout</button>
                         <Link className="nav-item div--nav-bar-item nav-right logo" to="/profile">Profile</Link>
                     </Fragment>
                     :

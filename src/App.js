@@ -19,11 +19,12 @@ const bookUrl = "http://localhost:3000/api/v1/books"
 const collectionsUrl = "http://localhost:3000/api/v1/collections"
 const bookCollectionUrl = "http://localhost:3000/api/v1/book_collections"
 
+
 class App extends Component {
   state = {
     searchQuery: "",
     newCollectionInput: "",
-    currentUser: {id: 1, email: "matt@gmail.com", created_at: "2018-09-26T14:40:45.916Z", updated_at: "2018-09-26T14:40:45.916Z"},
+    currentUser: {},
     collectionsArray: [],
     selectedCollection: {},
     fetchedBookArray: [],
@@ -32,15 +33,41 @@ class App extends Component {
   }
 
   componentDidMount(){
+
+    let token = localStorage.getItem("token");
+    if(!!token){
+      fetch(`http://localhost:3000/users/${token}`)
+        .then(response => response.json())
+        .then(foundUser => this.setState({currentUser: foundUser}))
+    }
+    else {
+      this.props.history.push(`/login`);
+    }
+
+
     //Fetch the user's collections on mount in order to display the list
-    fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}/collections`)
-      .then(response => response.json())
-      .then(collectionsArray => this.setState({collectionsArray}))
+    // fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}/collections`)
+    //   .then(response => response.json())
+    //   .then(collectionsArray => this.setState({collectionsArray}))
 
     //fetch all the books to use rails API data when available (rather than google api)
     fetch(`http://localhost:3000/api/v1/books/`)
       .then(response => response.json())
       .then(allBooks => this.setState({allBooks}))
+  }
+
+  loginUser = (currentUser) => {
+    this.setState({currentUser})
+    this.props.history.push(`/profile`);
+    fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}/collections`)
+      .then(response => response.json())
+      .then(collectionsArray => this.setState({collectionsArray}))
+  }
+
+  logoutUser = () => {
+    this.setState({ currentUser: {} })
+    localStorage.removeItem("token");
+    this.props.history.push(`/login`)
   }
 
   //Update state to maintain controlled book search form
@@ -174,10 +201,12 @@ class App extends Component {
   }
 
   render() {
+    console.log("Current user", this.state.currentUser)
     return (
       <div className="App div--app">
         <Route path="/" render={(routerProps) => <NavBar
           {...routerProps}
+          logoutUser={this.logoutUser}
           searchQuery={this.state.searchQuery}
           currentUser={this.state.currentUser}
           onSearchQueryChange={this.onSearchQueryChange}
@@ -226,6 +255,7 @@ class App extends Component {
           <Route path="/login" render={(routerProps) => <LoginContainer
               routerProps={routerProps}
               currentUser={this.state.currentUser}
+              loginUser={this.loginUser}
               collectionsArray={this.state.collectionsArray}
               onCollectionItemClick={this.onCollectionItemClick}
               onNewCollectionInputChange={this.onNewCollectionInputChange}

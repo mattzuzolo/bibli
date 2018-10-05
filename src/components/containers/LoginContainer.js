@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+const loginUrl = "http://localhost:3000/login"
+
 class LoginContainer extends Component {
     state = {
       email: "",
@@ -29,7 +31,14 @@ class LoginContainer extends Component {
        body: JSON.stringify(loginPostBody)
      };
 
-    console.log("FETCH WOULD OCCUR HERE:", loginPostConfig)
+    fetch(loginUrl, loginPostConfig)
+      .then(response => response.json())
+      .then(userData => {
+        if(userData.email){
+          this.props.loginUser(userData)
+          localStorage.setItem("token", userData.id)
+        }
+      })
   }
 
   guestLogin = (event) => {
