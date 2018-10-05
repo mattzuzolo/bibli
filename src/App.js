@@ -37,7 +37,7 @@ class App extends Component {
 
     let token = localStorage.getItem("token");
     if(!!token){
-      return fetch(`http://localhost:3000/users/api/v1/${token}`)
+       fetch(`http://localhost:3000/users/api/v1/${token}`)
         .then(response => response.json())
         .then(foundUser => this.setState({currentUser: foundUser}))
     }
@@ -171,8 +171,8 @@ class App extends Component {
   }
 
   onCollectionCardClick = (event, selectedBook) => {
+    console.log("selectedBook", selectedBook)
     this.setState({selectedBook})
-
 
     let foundBook = this.checkIfBookExists(this.state.allBooks, selectedBook);
 
@@ -232,7 +232,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("Current collection", this.state.newCollectionInput)
+    // console.log("Current collection", this.state.newCollectionInput)
     return (
       <div className="App div--app">
         <Route path="/" render={(routerProps) => <NavBar
