@@ -7,6 +7,9 @@ import CollectionContainer from "./components/containers/CollectionContainer"
 import SearchResultsContainer from "./components/containers/SearchResultsContainer"
 import DetailContainer from "./components/containers/DetailContainer"
 import ProfileContainer from "./components/containers/ProfileContainer"
+import LoginContainer from "./components/containers/LoginContainer"
+import RegisterContainer from "./components/containers/RegisterContainer"
+
 
 //Components
 import NavBar from "./components/NavBar"
@@ -112,7 +115,7 @@ class App extends Component {
   onCollectionCardClick = (event, selectedBook) => {
     this.setState({selectedBook})
 
-    
+
     let foundBook = this.checkIfBookExists(this.state.allBooks, selectedBook);
 
 
@@ -176,6 +179,7 @@ class App extends Component {
         <Route path="/" render={(routerProps) => <NavBar
           {...routerProps}
           searchQuery={this.state.searchQuery}
+          currentUser={this.state.currentUser}
           onSearchQueryChange={this.onSearchQueryChange}
           onSearchSubmit={this.onSearchSubmit} />}
         />
@@ -219,6 +223,19 @@ class App extends Component {
                           onAddBookToCollectionSubmit={this.onAddBookToCollectionSubmit}
                           />
             }}/>
+          <Route path="/login" render={(routerProps) => <LoginContainer
+              routerProps={routerProps}
+              currentUser={this.state.currentUser}
+              collectionsArray={this.state.collectionsArray}
+              onCollectionItemClick={this.onCollectionItemClick}
+              onNewCollectionInputChange={this.onNewCollectionInputChange}
+              onNewCollectionInputSubmit={this.onNewCollectionInputSubmit}
+            />}/>
+          <Route path="/register" render={(routerProps) => <RegisterContainer
+              routerProps={routerProps}
+              currentUser={this.state.currentUser}
+              collectionsArray={this.state.collectionsArray}
+            />}/>
         </Switch>
       </div>
     );
