@@ -4,7 +4,6 @@ import CollectionSidebarItem from "../CollectionSidebarItem";
 class CollectionSidebarList extends Component {
   //Create a new collection in the profile page using this component and form below
   render(){
-    console.log("Current collection array:", this.props.collectionsArray)
     return(
       <div className="div--collection-list">
         <h3>Your collections:</h3>
@@ -22,7 +21,7 @@ class CollectionSidebarList extends Component {
         </ul>
         <h3>Create a new collection:</h3>
         <form onSubmit={this.props.onNewCollectionInputSubmit}>
-          <input onChange={this.props.onNewCollectionInputChange}  placeholder="Give your new collection a name"></input>
+          <input value={this.props.newCollectionInput} onChange={this.props.onNewCollectionInputChange}  placeholder="Give your new collection a name"></input>
           <button>Submit</button>
         </form>
       </div>

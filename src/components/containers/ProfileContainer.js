@@ -24,6 +24,7 @@ class ProfileContainer extends Component {
             onCollectionItemClick={this.props.onCollectionItemClick}
             onNewCollectionInputChange={this.props.onNewCollectionInputChange}
             onNewCollectionInputSubmit={this.props.onNewCollectionInputSubmit}
+            newCollectionInput={this.props.newCollectionInput}
           />
         </div>
 

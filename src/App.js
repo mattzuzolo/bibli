@@ -83,7 +83,6 @@ class App extends Component {
 
   filterMissingKeys = (bookArray) => {
     return bookArray.filter(book => {
-      console.log("BOOK", book)
       if(book.volumeInfo.title
         && book.volumeInfo.authors[0]
         && book.volumeInfo.categories //[0]
@@ -100,7 +99,6 @@ class App extends Component {
         return book
       }
       else {
-        console.log("Book is missing keys", book)
       }
     })
   }
@@ -115,7 +113,6 @@ class App extends Component {
     //&maxResults=40
       .then(response => response.json())
       //update state with the fetchedBooks and reset the searchQuery input field
-      // .then((data) => console.log(data))
       .then(fetchedBookArray => this.filterMissingKeys(fetchedBookArray.items))
       .then(fetchedBookArray => this.setState({
         fetchedBookArray: fetchedBookArray,
@@ -235,7 +232,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("Fetched books", this.state.fetchedBookArray)
+    console.log("Current collection", this.state.newCollectionInput)
     return (
       <div className="App div--app">
         <Route path="/" render={(routerProps) => <NavBar
@@ -250,6 +247,7 @@ class App extends Component {
             <Route path="/profile" render={(routerProps) => <ProfileContainer
               routerProps={routerProps}
               currentUser={this.state.currentUser}
+              newCollectionInput={this.state.newCollectionInput}
               loginUser={this.loginUser}
               collectionsArray={this.state.collectionsArray}
               onCollectionItemClick={this.onCollectionItemClick}
