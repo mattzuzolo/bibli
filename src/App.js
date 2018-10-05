@@ -36,7 +36,7 @@ class App extends Component {
 
     let token = localStorage.getItem("token");
     if(!!token){
-      fetch(`http://localhost:3000/users/${token}`)
+      return fetch(`http://localhost:3000/users/${token}`)
         .then(response => response.json())
         .then(foundUser => this.setState({currentUser: foundUser}))
     }
@@ -57,8 +57,10 @@ class App extends Component {
   }
 
   loginUser = (currentUser) => {
-    this.setState({currentUser})
-    this.props.history.push(`/profile`);
+    this.setState({currentUser}, () => {
+        this.props.history.push(`/profile`);
+    })
+
     fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}/collections`)
       .then(response => response.json())
       .then(collectionsArray => this.setState({collectionsArray}))
@@ -75,24 +77,54 @@ class App extends Component {
     this.setState({ searchQuery: event.target.value })
   }
 
+  formatForFetch = (query) => {
+    return query.trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(' ').join('+');
+  }
+
+  filterMissingKeys = (bookArray) => {
+    return bookArray.filter(book => {
+      console.log("BOOK", book)
+      if(book.volumeInfo.title
+        && book.volumeInfo.authors[0]
+        && book.volumeInfo.categories //[0]
+        && book.volumeInfo.publishedDate
+        && book.volumeInfo.description
+        && book.volumeInfo.pageCount
+        && book.id
+        && book.selfLink
+        && book.volumeInfo.imageLinks
+        // && (book.volumeInfo.industryIdentifiers[0]["type"] === "isbn_ten")
+        // && (book.volumeInfo.industryIdentifiers[1]["type"] === "isbn_thirteen")
+         )
+           {
+        return book
+      }
+      else {
+        console.log("Book is missing keys", book)
+      }
+    })
+  }
+
   //Book search form submit event listener. Submission will trigger fetch to external Google books api
   onSearchSubmit = (event) => {
     event.preventDefault();
     //save query at time of submission and convert string to be used in query string for external API call
     let submittedQuery = this.state.searchQuery
-    let submittedQueryWithPlus = submittedQuery.trim().split(' ').join('+');
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${submittedQueryWithPlus}&maxResults=40`)
-
+    let formattedQuery = this.formatForFetch(submittedQuery)
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${formattedQuery}`)
+    //&maxResults=40
       .then(response => response.json())
       //update state with the fetchedBooks and reset the searchQuery input field
+      // .then((data) => console.log(data))
+      .then(fetchedBookArray => this.filterMissingKeys(fetchedBookArray.items))
       .then(fetchedBookArray => this.setState({
-        fetchedBookArray: fetchedBookArray.items,
+        fetchedBookArray: fetchedBookArray,
         searchQuery: ""
       }))
-      //Push users to the search result page after successfully fetching and setState
-      .then(() => this.props.history.push(`/search/${submittedQueryWithPlus}`))
+      // //Push users to the search result page after successfully fetching and setState
+      .then(() => this.props.history.push(`/search/${formattedQuery}`))
       .catch(error => {
-        console.log("An error occurred during the fetch", error)
+        alert("An error occurred. Please search for something else", error)
         this.setState({searchQuery: ""})
       })
   }
@@ -161,8 +193,8 @@ class App extends Component {
         google_id: selectedBook.id,
         google_url: selectedBook.volumeInfo.canonicalVolumeLink,
         thumbnail_url: selectedBook.volumeInfo.imageLinks.thumbnail,
-        isbn_ten: selectedBook.volumeInfo.industryIdentifiers[1].identifier,
-        isbn_thirteen: selectedBook.volumeInfo.industryIdentifiers[0].identifier,
+        // isbn_ten: selectedBook.volumeInfo.industryIdentifiers[1].identifier,
+        // isbn_thirteen: selectedBook.volumeInfo.industryIdentifiers[0].identifier,
       }
       this.postNewBook(postBookBody)
         .then(() => this.props.history.push(`/books/${postBookBody.google_id}`))
@@ -201,7 +233,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("Current user", this.state.currentUser)
+    console.log("Fetched books", this.state.fetchedBookArray)
     return (
       <div className="App div--app">
         <Route path="/" render={(routerProps) => <NavBar

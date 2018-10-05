@@ -15,7 +15,7 @@ class NavBar extends Component {
               className="nav-search"
               value={this.props.searchQuery}
               onChange={this.props.onSearchQueryChange}
-              placeholder="Search for a book, author or ISBN">
+              placeholder="Search for a book or author">
             </input>
         </form>
 

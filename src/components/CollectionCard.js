@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 class CollectionCard extends Component {
   render(){
+    
     return(
       <div className="div--collection-card" onClick={(event) => this.props.onCollectionCardClick(event, this.props.book)}>
         <div className="div--collection-card-thumb">

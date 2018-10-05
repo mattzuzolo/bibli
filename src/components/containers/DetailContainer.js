@@ -10,8 +10,8 @@ class DetailContainer extends Component {
     google_id: "",
     google_url: "",
     id: null,
-    isbn_ten: "",
-    isbn_thirteen: "",
+    // isbn_ten: "",
+    // isbn_thirteen: "",
     page_count: null,
     thumbnail_url: "",
     year: "",
@@ -73,7 +73,6 @@ class DetailContainer extends Component {
             <p><strong>Genre:</strong> {this.state.genre}</p>
             <p><strong>Released:</strong> {this.state.year}</p>
             <p><strong>Count:</strong> {this.state.page_count} pages</p>
-            <p><strong>ISBN-10:</strong> {this.state.isbn_ten} | <strong>ISBN-13:</strong> {this.state.isbn_thirteen}</p>
           </div>
 
 
