@@ -153,10 +153,12 @@ class App extends Component {
     }
     //POST request happens here. Input field reset and new collection optimistically rendered to state.collectionsArray
     fetch(collectionsUrl, collectionPostConfig)
-    this.setState({
-      newCollectionInput: "",
-      collectionsArray: [...this.state.collectionsArray, collectionPostBody]
-    })
+      .then(response => response.json())
+      .then(newCollection => this.setState({
+        newCollectionInput: "",
+        collectionsArray: [...this.state.collectionsArray, newCollection]
+      }))
+
   }
 
   //Event listener on event list so user can visit see the specific collection
