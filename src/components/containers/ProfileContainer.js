@@ -17,7 +17,6 @@ class ProfileContainer extends Component {
   render(){
     return(
       <div className="div--profile-container">
-
         <div className="div--left-column">
           <CollectionSidebarList
             collectionsArray={this.props.collectionsArray}

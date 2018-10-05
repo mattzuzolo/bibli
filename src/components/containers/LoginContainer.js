@@ -8,6 +8,13 @@ class LoginContainer extends Component {
       password: "",
     }
 
+  componentDidMount(){
+    let token = localStorage.getItem("token");
+    if(token){
+      this.props.routerProps.history.push("/profile")
+    }
+  }
+
   onInputChange = (event) => {
     let fieldName = event.target.name;
     let currentValue = event.target.value;
@@ -35,8 +42,8 @@ class LoginContainer extends Component {
       .then(response => response.json())
       .then(userData => {
         if(userData.email){
-          this.props.loginUser(userData)
-          localStorage.setItem("token", userData.id)
+          this.props.loginUser(userData);
+          localStorage.setItem("token", userData.id);           this.props.routerProps.history.push("/profile");
         }
       })
   }
@@ -62,6 +69,7 @@ class LoginContainer extends Component {
          if(userData.email){
            this.props.loginUser(userData)
            localStorage.setItem("token", userData.id)
+           this.props.routerProps.history.push("/profile")
          }
        })
 
