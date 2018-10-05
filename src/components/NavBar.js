@@ -24,11 +24,13 @@ class NavBar extends Component {
                     <Fragment>
                       <button className="nav-item div--nav-bar-item nav-right button-logout" onClick={this.props.logoutUser}>Logout</button>
                         <Link className="nav-item div--nav-bar-item nav-right logo" to="/profile">Profile</Link>
+                        <Link className="nav-item div--nav-bar-item nav-right logo" to="/about">about</Link>
                     </Fragment>
                     :
                     <Fragment>
                       <Link className="nav-item div--nav-bar-item nav-right logo" to="/register">register</Link>
                       <Link className="nav-item div--nav-bar-item nav-right logo" to="/login">login</Link>
+                      <Link className="nav-item div--nav-bar-item nav-right logo" to="/about">about</Link>
 
                     </Fragment>
           }

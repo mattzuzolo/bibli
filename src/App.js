@@ -9,6 +9,7 @@ import DetailContainer from "./components/containers/DetailContainer"
 import ProfileContainer from "./components/containers/ProfileContainer"
 import LoginContainer from "./components/containers/LoginContainer"
 import RegisterContainer from "./components/containers/RegisterContainer"
+import AboutContainer from "./components/containers/AboutContainer"
 
 
 //Components
@@ -36,7 +37,7 @@ class App extends Component {
 
     let token = localStorage.getItem("token");
     if(!!token){
-      return fetch(`http://localhost:3000/users/${token}`)
+      return fetch(`http://localhost:3000/users/api/v1/${token}`)
         .then(response => response.json())
         .then(foundUser => this.setState({currentUser: foundUser}))
     }
@@ -248,6 +249,7 @@ class App extends Component {
             <Route path="/profile" render={(routerProps) => <ProfileContainer
               routerProps={routerProps}
               currentUser={this.state.currentUser}
+              loginUser={this.loginUser}
               collectionsArray={this.state.collectionsArray}
               onCollectionItemClick={this.onCollectionItemClick}
               onNewCollectionInputChange={this.onNewCollectionInputChange}
@@ -298,6 +300,7 @@ class App extends Component {
               currentUser={this.state.currentUser}
               collectionsArray={this.state.collectionsArray}
             />}/>
+          <Route path="/about" component={AboutContainer} />
         </Switch>
       </div>
     );

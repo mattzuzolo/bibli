@@ -5,9 +5,10 @@ class ProfileContainer extends Component {
   componentDidMount(){
     let token = localStorage.getItem("token");
     if(!!token){
-      return fetch(`http://localhost:3000/users/${token}`)
+      console.log("TOKEN IS PRESENT!!!")
+      return fetch(`http://localhost:3000/api/v1/users/${token}`)
         .then(response => response.json())
-        .then(foundUser => this.setState({currentUser: foundUser}))
+        .then(foundUser => this.props.loginUser(foundUser))
     }
     else {
       this.props.routerProps.history.push(`/login`);
