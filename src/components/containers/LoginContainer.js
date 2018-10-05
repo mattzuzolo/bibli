@@ -43,8 +43,8 @@ class LoginContainer extends Component {
 
   guestLogin = (event) => {
     let loginPostBody = {
-      email: "guest@guest.com",
-      password: "123456789",
+      email: "guest@gmail.com",
+      password: "guest",
     }
 
     let loginPostConfig = {
@@ -56,7 +56,14 @@ class LoginContainer extends Component {
        body: JSON.stringify(loginPostBody)
      };
 
-    console.log("GUEST FETCH WOULD OCCUR HERE:", loginPostConfig)
+     fetch(loginUrl, loginPostConfig)
+       .then(response => response.json())
+       .then(userData => {
+         if(userData.email){
+           this.props.loginUser(userData)
+           localStorage.setItem("token", userData.id)
+         }
+       })
 
   }
 

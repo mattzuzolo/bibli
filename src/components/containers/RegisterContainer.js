@@ -34,7 +34,7 @@ class RegisterContainer extends Component {
 
     fetch(userUrl, newUserPostConfig)
       .then(response => response.json())
-      // .then(this.props.history.push("/login"))
+      .then(this.props.routerProps.history.push("/login"))
       .catch(error => {
         alert("Registration failed.")
       })

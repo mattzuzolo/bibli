@@ -58,9 +58,8 @@ class App extends Component {
   }
 
   loginUser = (currentUser) => {
-    this.setState({currentUser}, () => {
-        this.props.history.push(`/profile`);
-    })
+    this.setState({currentUser});
+    this.props.history.push(`/profile`);
 
     fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}/collections`)
       .then(response => response.json())

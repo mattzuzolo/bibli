@@ -8,7 +8,7 @@ class NavBar extends Component {
   render(){
     return(
       <div className="div--nav-bar">
-        <Link className="nav-item div--nav-bar-item nav-left logo" to="/home">Bibli</Link>
+        <Link className="nav-item div--nav-bar-item nav-left logo" to="/profile">Bibli</Link>
         <form
           className="nav-search nav-item div--nav-bar-item nav-left" onSubmit={this.props.onSearchSubmit}>
             <input
