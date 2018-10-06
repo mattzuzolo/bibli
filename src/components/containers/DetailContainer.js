@@ -49,7 +49,7 @@ class DetailContainer extends Component {
             <img src={this.state.thumbnail_url} alt="book-cover"/>
           </div>
           <div>
-            <a href={this.state.google_url} target="_blank">Google Books Link</a>
+            <a href={this.state.google_url} target="_blank">View on Google Books</a>
           </div>
           <div className="div--collection-dropdown">
             <p>Add this book to a collection:</p>
