@@ -2,7 +2,7 @@
 
 Manage and organize your personal library on the web.
 
-[See the live demo here](https://mattzuzolo.com/) *— Coming Soon*
+[See the live demo here](https://bibli-books.herokuapp.com/)
 
 ## Technology
 
