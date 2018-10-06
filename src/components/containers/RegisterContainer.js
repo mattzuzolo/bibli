@@ -55,7 +55,7 @@ class RegisterContainer extends Component {
             <button className="button button--login">Login</button>
           </div>
         </form>
-        <p className="guest-credentials register">Don't feel like registering? Visit the <Link to="/login">Login page</Link> to enter with guest credentials.</p>
+        <p className="register">Don't feel like registering? Visit the <Link to="/login">Login page</Link> to enter with guest credentials.</p>
       </div>
     )
   }

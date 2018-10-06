@@ -145,7 +145,7 @@ h3 {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #fbc4a8;
+  background-color: #ffcba4;
 }
   .div--nav-bar-item {
     /* font-weight: 600; */
@@ -216,7 +216,7 @@ h3 {
 
   .guest-credentials:hover{
     text-decoration: underline;
-    color: #fbc4a8;
+    color: #ffcba4;
   }
 
   /* ——————————————————————— */
