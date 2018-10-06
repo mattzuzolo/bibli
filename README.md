@@ -20,7 +20,7 @@ Bibli's RESTful API is built with Ruby on Rails and PostgreSQL.
 
 The code is available to view here: (https://github.com/mattzuzolo/bibli-back)
 
-## Roadmap
+## Project Roadmap
 
 * Add Authentication with Devise
 * Develop additional functionality related to managing and organizing user libraries
