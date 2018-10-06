@@ -40,8 +40,10 @@ class App extends Component {
        fetch(`http://localhost:3000/users/api/v1/${token}`)
         .then(response => response.json())
         .then(foundUser => this.setState({currentUser: foundUser}))
+        .catch(error => alert("A failure occurred"))
     }
     else {
+      localStorage.removeItem("token");
       this.props.history.push(`/login`);
     }
 
@@ -64,6 +66,7 @@ class App extends Component {
     fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}/collections`)
       .then(response => response.json())
       .then(collectionsArray => this.setState({collectionsArray}))
+      .catch(error => alert("Failure occurred"))
   }
 
   logoutUser = () => {
