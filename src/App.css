@@ -4,7 +4,7 @@
 }
 
 body {
-  margin-top: 10rem;
+  margin-top: 6rem;
 
 }
 
@@ -166,7 +166,7 @@ h3 {
 
   .nav-search {
     line-height: 2rem;
-    height: 2rem;
+    height: 2.5rem;
     width: 40rem;
 
   }
@@ -198,3 +198,34 @@ h3 {
       background:none;
       border:none;
     }
+
+/* ——————————————————————— */
+/* ——————————————————————— */
+/* LOGIN AND REGISTRATION STYLING */
+/* ——————————————————————— */
+/* ——————————————————————— */
+
+.div--login-container{
+  margin-left: 3rem;
+
+}
+
+  .guest-credentials{
+    text-decoration: underline;
+  }
+
+  .guest-credentials:hover{
+    text-decoration: underline;
+    color: #fbc4a8;
+  }
+
+  /* ——————————————————————— */
+  /* ——————————————————————— */
+  /* ABOUT STYLING */
+  /* ——————————————————————— */
+  /* ——————————————————————— */
+
+.div--about-container{
+  margin-left: 3rem;
+
+}
