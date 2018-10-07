@@ -34,24 +34,25 @@ class App extends Component {
   }
 
   componentDidMount(){
-
+    //This checks to see if a token is present in user's local storage
+    //If present, client looks for user in db so that user doesn't have to log in on new app mount
     let token = localStorage.getItem("token");
     if(!!token){
        fetch(`http://localhost:3000/users/api/v1/${token}`)
         .then(response => response.json())
         .then(foundUser => this.setState({currentUser: foundUser}))
-        .catch(error => alert("A failure occurred"))
+        .catch(error => {
+          //User must login if token is not verified
+          alert("A failure occurred")
+          this.props.history.push(`/login`);
+          localStorage.removeItem("token");
+        })
     }
+    //Removes the token if not found and pushes user to login page
     else {
       localStorage.removeItem("token");
       this.props.history.push(`/login`);
     }
-
-
-    //Fetch the user's collections on mount in order to display the list
-    // fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}/collections`)
-    //   .then(response => response.json())
-    //   .then(collectionsArray => this.setState({collectionsArray}))
 
     //fetch all the books to use rails API data when available (rather than google api)
     fetch(`http://localhost:3000/api/v1/books/`)
@@ -59,6 +60,7 @@ class App extends Component {
       .then(allBooks => this.setState({allBooks}))
   }
 
+  //This method updates currentUser in local react state and grabs their collections from API to display on profile
   loginUser = (currentUser) => {
     this.setState({currentUser});
     this.props.history.push(`/profile`);
@@ -69,6 +71,7 @@ class App extends Component {
       .catch(error => alert("Failure occurred"))
   }
 
+  //this method logouts out user by wiping currentUser in local state and removing token stored in localStorage
   logoutUser = () => {
     this.setState({ currentUser: {} })
     localStorage.removeItem("token");
@@ -80,10 +83,12 @@ class App extends Component {
     this.setState({ searchQuery: event.target.value })
   }
 
+  //This method formats the user's search for books or authors to use in the query string fetched to Google's API
   formatForFetch = (query) => {
     return query.trim().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(' ').join('+');
   }
 
+  //this method checks fetch response to ensure all data is ready for use by client
   filterMissingKeys = (bookArray) => {
     return bookArray.filter(book => {
       if(book.volumeInfo.title
@@ -97,8 +102,7 @@ class App extends Component {
         && book.volumeInfo.imageLinks
         // && (book.volumeInfo.industryIdentifiers[0]["type"] === "isbn_ten")
         // && (book.volumeInfo.industryIdentifiers[1]["type"] === "isbn_thirteen")
-         )
-           {
+        ){
         return book
       }
       else {
@@ -118,11 +122,14 @@ class App extends Component {
       .then(fetchedBookArray => this.filterMissingKeys(fetchedBookArray.items))
       .then(fetchedBookArray => this.setState({
         fetchedBookArray: fetchedBookArray,
+        //reset searchBar query so user can immediately begin a new query if desired
         searchQuery: ""
       }))
-      // //Push users to the search result page after successfully fetching and setState
+      //Push users to the search result page after successfully fetching and setState
       .then(() => this.props.history.push(`/search/${formattedQuery}`))
       .catch(error => {
+        //Alert user that the fetch failed
+        //Sometimes Google's API does not return expected results
         alert("An error occurred. Please search for something else", error)
         this.setState({searchQuery: ""})
       })
@@ -173,11 +180,9 @@ class App extends Component {
   }
 
   onCollectionCardClick = (event, selectedBook) => {
-    console.log("selectedBook", selectedBook)
     this.setState({selectedBook})
 
     let foundBook = this.checkIfBookExists(this.state.allBooks, selectedBook);
-
 
     //POST new book to DB if doesn't exist locally. Push user onward to detail page regardless.
     if(foundBook){
@@ -234,7 +239,6 @@ class App extends Component {
   }
 
   render() {
-    // console.log("Current collection", this.state.newCollectionInput)
     return (
       <div className="App div--app">
         <Route path="/" render={(routerProps) => <NavBar
