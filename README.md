@@ -2,7 +2,7 @@
 
 Manage and organize your personal library on the web.
 
-[See the live demo here](https://mattzuzolo.com/) *— Coming Soon*
+[See the live demo here](https://bibli-books.herokuapp.com/)
 
 ## Technology
 
@@ -19,6 +19,14 @@ npm run start
 Bibli's RESTful API is built with Ruby on Rails and PostgreSQL. 
 
 The code is available to view here: (https://github.com/mattzuzolo/bibli-back)
+
+## Project Roadmap
+
+* Add Authentication with Devise
+* Develop additional functionality related to managing and organizing user libraries
+* Improve book search functionality
+* Continue improving performance, security, design and overall code quality
+* Expand social features
 
 ## Author
 
