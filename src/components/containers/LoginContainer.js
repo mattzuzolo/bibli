@@ -8,6 +8,9 @@ class LoginContainer extends Component {
       password: "",
     }
 
+  //checks to see if user is already logged in by checking token.
+  //If user has a token, they are pushed to the profile page
+  //If token is invalid upon reaching /profile, user will be pushed to /login
   componentDidMount(){
     let token = localStorage.getItem("token");
     if(token){
@@ -15,6 +18,7 @@ class LoginContainer extends Component {
     }
   }
 
+  //creates a new user by POSTing to API
   onInputChange = (event) => {
     let fieldName = event.target.name;
     let currentValue = event.target.value;

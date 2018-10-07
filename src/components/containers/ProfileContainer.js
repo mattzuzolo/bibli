@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import CollectionSidebarList from "./CollectionSidebarList"
 
 class ProfileContainer extends Component {
+  //this code is redundant. Will update later.
   componentDidMount(){
     let token = localStorage.getItem("token");
     if(!!token){
-      console.log("TOKEN IS PRESENT!!!")
       return fetch(`http://localhost:3000/api/v1/users/${token}`)
         .then(response => response.json())
         .then(foundUser => this.props.loginUser(foundUser))
