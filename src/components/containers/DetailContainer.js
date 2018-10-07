@@ -17,7 +17,7 @@ class DetailContainer extends Component {
     year: "",
   }
 
-  //fetch the selected book on page load so all needed data is always available
+  //fetch the selected book on mount so all needed data is always available
   componentDidMount(){
     fetch(`http://localhost:3000/api/v1/books/${this.props.bookId}`)
       .then(response => response.json())
@@ -74,14 +74,7 @@ class DetailContainer extends Component {
             <p><strong>Released:</strong> {this.state.year}</p>
             <p><strong>Count:</strong> {this.state.page_count} pages</p>
           </div>
-
-
-
         </div>
-
-
-
-
       </div>
     )
   }
