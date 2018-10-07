@@ -2,8 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
-
-  //clear loggedin redux state, remove token and push to login upon clicking logout
   render(){
     return(
       <div className="div--nav-bar">
@@ -17,7 +15,7 @@ class NavBar extends Component {
               placeholder="Search for a book or author">
             </input>
         </form>
-
+        {/*Checks to see if there is a user logged in to local react state and renders navbar options conditionally*/}
         { typeof this.props.currentUser.id === "number"
                     ?
                     <Fragment>
@@ -33,8 +31,6 @@ class NavBar extends Component {
 
                     </Fragment>
           }
-
-
       </div>
     )
   }
