@@ -6,7 +6,7 @@ class ProfileContainer extends Component {
   componentDidMount(){
     let token = localStorage.getItem("token");
     if(!!token){
-      return fetch(`http://localhost:3000/api/v1/users/${token}`)
+      return fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/users/${token}`)
         .then(response => response.json())
         .then(foundUser => this.props.loginUser(foundUser))
     }

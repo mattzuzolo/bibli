@@ -19,7 +19,7 @@ class DetailContainer extends Component {
 
   //fetch the selected book on mount so all needed data is always available
   componentDidMount(){
-    fetch(`http://localhost:3000/api/v1/books/${this.props.bookId}`)
+    fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/books/${this.props.bookId}`)
       .then(response => response.json())
       .then(foundBook => this.setState({
         title: foundBook.title,
@@ -40,7 +40,6 @@ class DetailContainer extends Component {
 
   render(){
     //This JSX displays the book + details. Also allows user to add the current book to an existing collection via select option below
-    console.log("DETAIL CONTAINER STATE", this.state)
     return(
       <div className="div--detail-container">
 

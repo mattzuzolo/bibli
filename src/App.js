@@ -16,9 +16,9 @@ import AboutContainer from "./components/containers/AboutContainer"
 import NavBar from "./components/NavBar"
 
 //Rails API endpoints
-const bookUrl = "http://localhost:3000/api/v1/books"
-const collectionsUrl = "http://localhost:3000/api/v1/collections"
-const bookCollectionUrl = "http://localhost:3000/api/v1/book_collections"
+const bookUrl = "https://infinite-spire-87700.herokuapp.com/api/v1/books"
+const collectionsUrl = "https://infinite-spire-87700.herokuapp.com/api/v1/collections"
+const bookCollectionUrl = "https://infinite-spire-87700.herokuapp.com/api/v1/book_collections"
 
 
 class App extends Component {
@@ -38,7 +38,7 @@ class App extends Component {
     //If present, client looks for user in db so that user doesn't have to log in on new app mount
     let token = localStorage.getItem("token");
     if(!!token){
-       fetch(`http://localhost:3000/users/api/v1/${token}`)
+       fetch(`https://infinite-spire-87700.herokuapp.com/users/api/v1/${token}`)
         .then(response => response.json())
         .then(foundUser => this.setState({currentUser: foundUser}))
         .catch(error => {
@@ -55,9 +55,10 @@ class App extends Component {
     }
 
     //fetch all the books to use rails API data when available (rather than google api)
-    fetch(`http://localhost:3000/api/v1/books/`)
+    fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/books/`)
       .then(response => response.json())
       .then(allBooks => this.setState({allBooks}))
+      .catch(allBooks => this.setState({allBooks: {}}))
   }
 
   //This method updates currentUser in local react state and grabs their collections from API to display on profile
@@ -65,7 +66,7 @@ class App extends Component {
     this.setState({currentUser});
     this.props.history.push(`/profile`);
 
-    fetch(`http://localhost:3000/api/v1/users/${this.state.currentUser.id}/collections`)
+    fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/users/${this.state.currentUser.id}/collections`)
       .then(response => response.json())
       .then(collectionsArray => this.setState({collectionsArray}))
       .catch(error => alert("Failure occurred"))
@@ -126,7 +127,9 @@ class App extends Component {
         searchQuery: ""
       }))
       //Push users to the search result page after successfully fetching and setState
-      .then(() => this.props.history.push(`/search/${formattedQuery}`))
+      .then(() =>
+
+       this.props.history.push(`/search/${formattedQuery}`))
       .catch(error => {
         //Alert user that the fetch failed
         //Sometimes Google's API does not return expected results

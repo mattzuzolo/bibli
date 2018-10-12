@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-const userUrl = "http://localhost:3000/api/v1/users"
+const userUrl = "https://infinite-spire-87700.herokuapp.com/api/v1/users"
 
 class RegisterContainer extends Component {
     state = {
@@ -44,11 +44,14 @@ class RegisterContainer extends Component {
        body: JSON.stringify(newUserPostBody)
      };
 
+     console.log("newUserPostConfig", newUserPostConfig)
+
     fetch(userUrl, newUserPostConfig)
       .then(response => response.json())
       .then(this.props.routerProps.history.push("/login"))
       .catch(error => {
-        alert("Registration failed.")
+        console.log("ERROR:", error)
+        alert("Registration failed")
       })
   }
 

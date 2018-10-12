@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const loginUrl = "http://localhost:3000/login"
+const loginUrl = "https://infinite-spire-87700.herokuapp.com/login"
 
 class LoginContainer extends Component {
     state = {

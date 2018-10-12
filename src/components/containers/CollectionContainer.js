@@ -10,7 +10,7 @@ class CollectionContainer extends Component {
   //GET all the books that belong to the current collection and save to local state
   //fetch the selected collection on page load so all needed data is always available
   componentDidMount(){
-    fetch(`http://localhost:3000/api/v1/collections/${this.props.collectionId}`)
+    fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/collections/${this.props.collectionId}`)
       .then(response => response.json())
       .then(fetchedBooksArray => this.setState({ localBooksArray: fetchedBooksArray }))
   }
