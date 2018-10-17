@@ -47,6 +47,7 @@ h3 {
 
   .h1--collection-container-name{
     padding-left: 2rem;
+    width: 100vh;
   }
 
   .div--collection-card-detail{
