@@ -238,7 +238,15 @@ class App extends Component {
       },
       body: JSON.stringify(bookCollectionBody)
     }
-    return fetch(bookCollectionUrl, postBookCollectionConfig)
+    fetch(bookCollectionUrl, postBookCollectionConfig)
+      .then(response => {
+        if(response.status === 200){
+          console.log("Book successfully added to your selected library");
+        }
+        else {
+          console.log("Book was not added to your library");
+        }
+      })
   }
 
   render() {
@@ -292,6 +300,7 @@ class App extends Component {
                           currentUser={this.state.currentUser}
                           collectionsArray={this.state.collectionsArray}
                           onAddBookToCollectionSubmit={this.onAddBookToCollectionSubmit}
+                          addToCollectionStatus={this.addToCollectionStatus}
                           />
             }}/>
           <Route path="/login" render={(routerProps) => <LoginContainer
