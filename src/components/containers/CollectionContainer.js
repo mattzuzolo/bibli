@@ -15,6 +15,11 @@ class CollectionContainer extends Component {
       .then(fetchedBooksArray => this.setState({ localBooksArray: fetchedBooksArray }))
   }
 
+  removeFromCollection = (event, bookCollectionId) => {
+    fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/book_collections/${bookCollectionId}`)
+      .then(response => response.json())
+  }
+
   //display all the books in the current collection
   render(){
     return(
@@ -30,6 +35,7 @@ class CollectionContainer extends Component {
               author={book.author}
               image={book.thumbnail_url}
               onCollectionCardClick={this.props.onCollectionCardClick}
+              removeFromCollection={this.removeFromCollection}
              />
           ))}
         </div>
