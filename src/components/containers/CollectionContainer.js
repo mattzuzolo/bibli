@@ -15,9 +15,11 @@ class CollectionContainer extends Component {
       .then(fetchedBooksArray => this.setState({ localBooksArray: fetchedBooksArray }))
   }
 
-  removeFromCollection = (event, bookCollectionId) => {
-    fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/book_collections/${bookCollectionId}`)
-      .then(response => response.json())
+  removeFromCollection = (event, book) => {
+    console.log("TRYING TO REMOVE EVENT", event)
+    console.log("TRYING TO REMOVE", book);
+    // fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/book_collections/${bookCollectionId}`)
+    //   .then(response => response.json())
   }
 
   //display all the books in the current collection
