@@ -5,6 +5,7 @@ import CollectionCard from "../CollectionCard"
 class CollectionContainer extends Component {
   state = {
     localBooksArray: [],
+    bookCollectionArray: [],
   }
 
   //GET all the books that belong to the current collection and save to local state
@@ -13,11 +14,16 @@ class CollectionContainer extends Component {
     fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/collections/${this.props.collectionId}`)
       .then(response => response.json())
       .then(fetchedBooksArray => this.setState({ localBooksArray: fetchedBooksArray }))
+
+    fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/book_collections`)
+      .then(response => response.json())
+      .then(fetchedBookCollectionArray => this.setState({fetchBookCollectionArray: fetchedBookCollectionArray}))
   }
 
   removeFromCollection = (event, book) => {
     console.log("TRYING TO REMOVE EVENT", event)
     console.log("TRYING TO REMOVE", book);
+    console.log("CURRENT COLLECTION:", this.props.collectionId)
     // fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/book_collections/${bookCollectionId}`)
     //   .then(response => response.json())
   }
