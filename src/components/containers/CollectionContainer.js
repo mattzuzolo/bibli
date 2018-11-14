@@ -17,13 +17,20 @@ class CollectionContainer extends Component {
 
     fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/book_collections`)
       .then(response => response.json())
-      .then(fetchedBookCollectionArray => this.setState({fetchBookCollectionArray: fetchedBookCollectionArray}))
+      .then(fetchedBookCollectionArray => this.setState({bookCollectionArray: fetchedBookCollectionArray}))
+    
+
   }
 
-  removeFromCollection = (event, book) => {
-    console.log("TRYING TO REMOVE EVENT", event)
-    console.log("TRYING TO REMOVE", book);
-    console.log("CURRENT COLLECTION:", this.props.collectionId)
+  removeFromCollection = (event, bookId) => {
+    //convert collection prop to integer
+    let targetCollection = parseInt(this.props.collectionId, 10);
+    console.log("to iterate:", this.state.bookCollectionArray);
+
+    let bookCollectionTarget = this.state.bookCollectionArray.find(bookCollection => {
+      return (bookCollection.book_id === bookId && bookCollection.collection_id === targetCollection)
+    });
+
     // fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/book_collections/${bookCollectionId}`)
     //   .then(response => response.json())
   }

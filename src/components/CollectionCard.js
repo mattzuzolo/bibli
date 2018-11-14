@@ -14,7 +14,7 @@ class CollectionCard extends Component {
           {/* <p className="div--collection-card-detail">by <span className="span--author-name">{this.props.author}</span></p> */}
           <p>{this.props.year}</p>
           {!!this.props.removeFromCollection ?
-            <button type="button" onClick={(event) => this.props.removeFromCollection(event, this.props.book)}>REMOVE FROM COLLECTION</button>
+            <button type="button" onClick={(event) => this.props.removeFromCollection(event, this.props.id)}>REMOVE FROM COLLECTION</button>
             :
             null
           }
