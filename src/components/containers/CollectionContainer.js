@@ -25,11 +25,14 @@ class CollectionContainer extends Component {
   removeFromCollection = (event, bookId) => {
     //convert collection prop to integer
     let targetCollection = parseInt(this.props.collectionId, 10);
-    console.log("to iterate:", this.state.bookCollectionArray);
 
     let bookCollectionTarget = this.state.bookCollectionArray.find(bookCollection => {
       return (bookCollection.book_id === bookId && bookCollection.collection_id === targetCollection)
     });
+
+
+    //Now fetch the bookCollection to the backend. Delete the entry.
+    //Optimistically remove the book from the list
 
     // fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/book_collections/${bookCollectionId}`)
     //   .then(response => response.json())
