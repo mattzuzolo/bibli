@@ -18,7 +18,7 @@ class CollectionContainer extends Component {
     fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/book_collections`)
       .then(response => response.json())
       .then(fetchedBookCollectionArray => this.setState({bookCollectionArray: fetchedBookCollectionArray}))
-    
+
 
   }
 
@@ -29,10 +29,18 @@ class CollectionContainer extends Component {
     let bookCollectionTarget = this.state.bookCollectionArray.find(bookCollection => {
       return (bookCollection.book_id === bookId && bookCollection.collection_id === targetCollection)
     });
-
+    console.log("bookCollectionTarget", bookCollectionTarget.id)
 
     //Now fetch the bookCollection to the backend. Delete the entry.
     //Optimistically remove the book from the list
+    fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/book_collections/${bookCollectionTarget.id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      }
+    })
+      // .then(response => response.json())
+      .then(console.log)
 
     // fetch(`https://infinite-spire-87700.herokuapp.com/api/v1/book_collections/${bookCollectionId}`)
     //   .then(response => response.json())
